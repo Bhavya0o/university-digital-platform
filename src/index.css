@@ -600,6 +600,7 @@ margin-bottom:8px;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  margin-left: 30px;
 }
 
 .button-88:hover {
@@ -1015,7 +1016,7 @@ display: flex;
 .main-container {
   display: flex;
   margin-left: 280px; /* Must match sidebar width */
-  background-color: #f8fafc; /* Light grey background for the app */
+  background-color: #f3f6fb;
   min-height: 100vh;
 }
 
@@ -1024,74 +1025,202 @@ display: flex;
   padding: 40px;
 }
 
-
-
-.chat-container{
-width: 1150px;
-margin: auto;
-background:white;
-border-radius:12px;
-box-shadow:0 5px 20px rgba(0,0,0,0.15);
-padding:20px;
+.gen-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #edf2ff 0%, #f8fbff 100%);
 }
 
-.chat-title{
-text-align:center;
-margin-bottom:15px;
+.gen-content {
+  max-width: 1200px;
+  margin: 110px auto 40px;
+  padding: 0 24px;
 }
 
-.chat-box{
-height:400px;
-overflow-y:auto;
-background:#f4f6f9;
-padding:0px;
-border-radius:10px;
-display:flex;
-flex-direction:column;
-gap:10px;
+.assistant-card {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(71, 85, 105, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+  padding: 32px;
+  backdrop-filter: blur(12px);
 }
 
-.user-msg{
-align-self:flex-end;
-background:#2563eb;
-color:white;
-padding:10px 14px;
-border-radius:15px;
-max-width:70%;
+.assistant-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
 }
 
-.ai-msg{
-align-self:flex-start;
-background:#e5e7eb;
-padding:10px 14px;
-border-radius:15px;
-max-width:70%;
+.assistant-eyebrow {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #2563eb;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
-.chat-input{
-display:flex;
-margin-top:10px;
-gap:10px;
+.assistant-title {
+  font-size: clamp(2rem, 2.5vw, 2.6rem);
+  margin: 0;
+  color: #0f172a;
+  line-height: 1.05;
 }
 
-.chat-input input{
-flex:1;
-padding:10px;
-border-radius:8px;
-border:1px solid #ccc;
+.assistant-copy {
+  margin: 12px 0 0;
+  color: #475569;
+  max-width: 680px;
+  line-height: 1.7;
 }
 
-.chat-input button{
-background:#2563eb;
-color:white;
-border:none;
-padding:10px 15px;
-border-radius:8px;
-cursor:pointer;
+.assistant-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1rem;
+  background: rgba(37, 99, 235, 0.12);
+  color: #1d4ed8;
+  border-radius: 999px;
+  font-weight: 700;
+  min-width: 88px;
 }
 
-.chat-input button:hover{
-background:#1e40af;
+.chat-box {
+  min-height: 420px;
+  max-height: 520px;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
+  padding: 24px;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.chat-empty {
+  color: #64748b;
+  font-size: 0.98rem;
+  text-align: center;
+  margin: auto;
+}
+
+.user-msg,
+.ai-msg {
+  max-width: 80%;
+  padding: 16px 18px;
+  border-radius: 24px;
+  line-height: 1.6;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+}
+
+.user-msg {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  border-bottom-right-radius: 6px;
+}
+
+.ai-msg {
+  align-self: flex-start;
+  background: #f8fafc;
+  color: #0f172a;
+  border-bottom-left-radius: 6px;
+}
+
+.chat-input {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.chat-input input {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: white;
+  color: #0f172a;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chat-input input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.chat-input button {
+  min-width: 72px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 18px;
+  padding: 0 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.chat-input button:hover {
+  background: #1e40af;
+  transform: translateY(-1px);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.welcome-text {
+  color: #e2e8f0;
+  font-size: 0.95rem;
+}
+
+.button-2 {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.button-2:hover {
+  background: rgba(255, 255, 255, 0.26);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 980px) {
+  .assistant-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chat-box {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 680px) {
+  .gen-content {
+    margin: 90px 16px 24px;
+  }
+
+  .chat-input {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-input button {
+    width: 100%;
+  }
 }
 
 
@@ -1208,4 +1337,271 @@ input:checked + .slider:before {
   justify-content: space-between; /* pushes toggle to right */
   align-items: center;
   width: 100%;
+}
+
+
+
+
+
+/* STUDENT DASHBOARD THEME */
+
+.student-dashboard {
+  background: #f4f9ff;
+}
+
+/* Topbar */
+
+.student-dashboard .topbar {
+  background: linear-gradient(90deg, #2563eb, #06b6d4);
+  color: white;
+}
+
+/* Sidebar */
+
+.student-dashboard .sidebar {
+  background: #0f172a;
+}
+
+.student-dashboard .menu li a {
+  color: #e2e8f0;
+}
+
+.student-dashboard .menu li a:hover {
+  background: #1e293b;
+  border-radius: 6px;
+}
+
+/* Cards */
+
+.student-dashboard .card {
+  background: white;
+  border-left: 5px solid #2563eb;
+  transition: 0.3s;
+}
+
+.student-dashboard .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Buttons */
+
+.student-dashboard .btn.primary {
+  background: #2563eb;
+  color: white;
+}
+
+.student-dashboard .btn.secondary {
+  background: #06b6d4;
+  color: white;
+}
+
+/* Announcement Box */
+
+.student-dashboard .announcements {
+  background: #ffffff;
+  border-left: 6px solid #06b6d4;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* Announcement category */
+
+.student-dashboard .An {
+  background: #2563eb;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 12px;
+}
+
+/* Logout Button */
+
+.student-dashboard .button-88 {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px;
+  margin-top: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.courses-page {
+  min-height: 100vh;
+  padding: 32px;
+  background: linear-gradient(135deg, #f8fbff 0%, #eef4ff 100%);
+}
+
+.courses-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: white;
+  padding: 28px 30px;
+  border-radius: 24px;
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.2);
+}
+
+.courses-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.courses-hero h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.courses-description {
+  max-width: 560px;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.courses-summary-card {
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  padding: 18px 20px;
+  border-radius: 16px;
+  min-width: 140px;
+  text-align: center;
+}
+
+.courses-summary-card p {
+  font-size: 0.9rem;
+  opacity: 0.86;
+}
+
+.courses-summary-card h2 {
+  font-size: 1.8rem;
+  margin: 6px 0;
+}
+
+.courses-summary-card span {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.courses-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.stat-pill {
+  background: white;
+  border-radius: 16px;
+  padding: 16px 18px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-pill strong {
+  color: #2563eb;
+  font-size: 1.2rem;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.course-card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+}
+
+.course-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.course-badge {
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 0.78rem;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-weight: 600;
+}
+
+.course-code {
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.course-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  color: #111827;
+}
+
+.course-instructor {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+}
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb, #4f46e5);
+  border-radius: 999px;
+}
+
+.course-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+.course-btn {
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.course-btn:hover {
+  background: #1d4ed8;
 }

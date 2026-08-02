@@ -14,7 +14,7 @@ function Home({ announcements, schedule }) {
       <header className="topbar">
         <h2 className="university">University Digital Platform</h2>
         <div className="user-info">
-          <span>Welcome Student</span>
+          <span>Welcome Teacher 👩‍🏫 </span>
         </div>
       </header>
 
@@ -26,6 +26,8 @@ function Home({ announcements, schedule }) {
             <li><Link to="/Home">🏠 <span className="text">Home</span></Link></li>
 
             <li><Link to="/Gen">✨ <span className="text">AI-Assistant</span></Link></li>
+                 
+
             <li><Link to="/My Courses">📚 <span className="text">My Courses</span></Link></li>
             {/* <li><Link to="/Assistant">📝 <span className="text">Assistant</span></Link></li> */}
             <li><Link to="/Timetable">📅 <span className="text">Timetable</span></Link></li>
@@ -80,9 +82,9 @@ function Home({ announcements, schedule }) {
               <h3>📚 My Courses</h3>
               <p>View enrolled courses and materials</p>
             </div>
-            <div className="card">
-              <h3>📝 Results</h3>
-              <p>Check semester results</p>
+            <div className="card" onClick={() => navigate("/Gen")}>
+              <h3>✨ AI Assistant</h3>
+              <p>Chat with the university assistant for help</p>
             </div>
             <div className="card" onClick={() => navigate("/Timetable")}>
               <h3>📅 Timetable</h3>

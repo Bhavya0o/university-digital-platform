@@ -14,11 +14,14 @@ import Timetable from "./Sidebar/Timetable";
 import Gen from "./Sidebar/Gen";
 import ProtectedRoutes from "./Protectedroutes";
 
+import StudentHome from "./StudentHome";
+import ContactForm from "./ContactFom";
 
 
 
 
 function App() {
+  
   // 1. Define the shared state here
   const [announcements, setAnnouncements] = useState([
     {
@@ -82,6 +85,9 @@ return (
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Settings" element={<Settings />} />
         <Route path="/Gen" element={<Gen />} />
+        <Route path="/StudentHome" element={<StudentHome />} />
+        <Route path="/ContactForm" element={<ContactForm />} />
+
 
       </Routes>
     </BrowserRouter>

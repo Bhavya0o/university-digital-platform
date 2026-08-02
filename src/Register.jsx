@@ -1,28 +1,40 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 
 function Register(){
 
+const navigate = useNavigate();
 const [name,setName] = useState("");
 const [email,setEmail] = useState("");
 const [password,setPassword] = useState("");
+const [role,setRole] = useState("student");
 
 const handleRegister = async (e) => {
+
   e.preventDefault();
+
   try {
-    const res = await axios.post("http://localhost:5000/register", {
-      name,
-      email,
-      password
-    });
+
+    const res = await axios.post(
+      "http://localhost:5000/api/auth/register",
+      {
+        name,
+        email,
+        password,
+        role
+      }
+    );
+
     alert(res.data.message);
-    // Optional: redirect to login after success
-    // navigate("/Login"); 
+
   } catch (error) {
-    // This will alert "User already exists" or whatever the backend sends
-    alert(error.response?.data?.message || "Registration failed");
+
+    console.log(error);
+    alert("Registration failed");
+
   }
+
 };
 
 return(
@@ -63,11 +75,22 @@ required
 />
 </div>
 
+{/* Role Selection */}
+
+<div className="input-group">
+<select onChange={(e)=>setRole(e.target.value)}>
+
+<option value="student">Student</option>
+<option value="teacher">Teacher</option>
+
+</select>
+</div>
+
 <button className="auth-btn">Register</button>
 
 <p className="switch-text">
 Already have an account?
-<a href="/Login"> Login</a>
+<a href="/login"> Login</a>
 </p>
 
 </form>
@@ -81,7 +104,3 @@ Already have an account?
 }
 
 export default Register;
-
-
-
-
