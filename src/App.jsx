@@ -13,7 +13,9 @@ import Settings from "./Sidebar/Settings";
 import Timetable from "./Sidebar/Timetable";
 import Gen from "./Sidebar/Gen";
 import ProtectedRoutes from "./Protectedroutes";
-
+import Results from "./pages/Results";
+import Library from "./pages/Library";
+import Assignments from "./pages/Assignments";
 import StudentHome from "./StudentHome";
 import ContactForm from "./ContactFom";
 
@@ -53,7 +55,9 @@ return (
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
+        <Route path="/register" element={<Register />} />
         
         
        <Route
@@ -65,27 +69,57 @@ return (
   }
 />
 
-        <Route 
-          path="/Announcements" 
+        <Route
+          path="/Announcements"
           element={
-            <Announcements 
-              announcements={announcements} 
-              setAnnouncements={setAnnouncements} 
+            <Announcements
+              announcements={announcements}
+              setAnnouncements={setAnnouncements}
             />
-          } 
+          }
+        />
+        <Route
+          path="/announcements"
+          element={
+            <Announcements
+              announcements={announcements}
+              setAnnouncements={setAnnouncements}
+            />
+          }
         />
 
-        <Route 
-          path="/Timetable" 
-          element={<Timetable schedule={schedule} setSchedule={setSchedule} />} 
+        <Route
+          path="/Timetable"
+          element={<Timetable schedule={schedule} setSchedule={setSchedule} />}
         />
-        <Route path="/Assistant" element={<Assistant/>} />
+        <Route
+          path="/timetable"
+          element={<Timetable schedule={schedule} setSchedule={setSchedule} />}
+        />
+        <Route path="/Assistant" element={<Assistant />} />
         <Route path="/Homee" element={<Homee />} />
         <Route path="/My Courses" element={<MyCourses />} />
+        <Route path="/my-courses" element={<MyCourses />} />
+        <Route path="/courses" element={<MyCourses />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/Settings" element={<Settings />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="/Gen" element={<Gen />} />
-        <Route path="/StudentHome" element={<StudentHome />} />
+        <Route
+          path="/StudentHome"
+          element={<StudentHome announcements={announcements} schedule={schedule} />}
+        />
+        <Route
+          path="/student-home"
+          element={<StudentHome announcements={announcements} schedule={schedule} />}
+        />
+        <Route path="/Results" element={<Results />} />
+        <Route path="/results" element={<Results />} />
+        <Route path="/Library" element={<Library />} />
+        <Route path="/library" element={<Library />} />
+        <Route path="/Assignments" element={<Assignments />} />
+        <Route path="/assignments" element={<Assignments />} />
         <Route path="/ContactForm" element={<ContactForm />} />
 
 
@@ -95,10 +129,6 @@ return (
 }
 
 export default App;
-
-
-
-
 
 
 

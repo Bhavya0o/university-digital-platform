@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
 
@@ -32,7 +32,7 @@ if(role === "student"){
   navigate("/StudentHome");
 }
 else if(role === "teacher"){
-  navigate("/home");
+  navigate("/Home");
 }
 else{
   navigate("/");
@@ -81,7 +81,7 @@ else{
 
           <p className="switch-text">
             Don't have an account?
-            <a href="/register"> Register</a>
+            <Link to="/register"> Register</Link>
           </p>
 
         </form>

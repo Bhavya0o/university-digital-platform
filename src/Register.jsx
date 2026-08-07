@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Register(){
 
@@ -26,13 +26,12 @@ const handleRegister = async (e) => {
       }
     );
 
-    alert(res.data.message);
-
+    alert(res.data.message || "Registration successful");
+    navigate("/login");
   } catch (error) {
-
-    console.log(error);
-    alert("Registration failed");
-
+    console.error("Registration Error:", error);
+    const msg = error.response?.data?.message || error.message || "Registration failed";
+    alert(msg);
   }
 
 };
@@ -78,7 +77,7 @@ required
 {/* Role Selection */}
 
 <div className="input-group">
-<select onChange={(e)=>setRole(e.target.value)}>
+<select value={role} onChange={(e)=>setRole(e.target.value)}>
 
 <option value="student">Student</option>
 <option value="teacher">Teacher</option>
@@ -90,7 +89,7 @@ required
 
 <p className="switch-text">
 Already have an account?
-<a href="/login"> Login</a>
+<Link to="/login"> Login</Link>
 </p>
 
 </form>
