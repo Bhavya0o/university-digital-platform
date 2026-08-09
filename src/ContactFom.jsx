@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { API_URL } from './api';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
@@ -12,8 +13,7 @@ const ContactForm = () => {
     try {
 
         
-      // Replace with your actual deployed backend URL
-      await axios.post('http://localhost:5000/api/contact-form', formData);
+      await axios.post(`${API_URL}/api/contact-form`, formData);
       setStatus('Success! Check your WhatsApp.');
       setFormData({ name: '', phone: '', message: '' });
     } catch (err) {

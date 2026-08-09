@@ -1,5 +1,6 @@
 ﻿import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { API_URL } from "../api";
 
 function Gen() {
 
@@ -14,7 +15,7 @@ function Gen() {
 
     setChat([...chat, userMessage]);
 
-    const res = await fetch("http://localhost:5000/api/chat", {
+    const res = await fetch(`${API_URL}/api/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
