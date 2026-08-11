@@ -3,104 +3,159 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { API_URL } from "./api";
 
-function Register(){
+function Register() {
+  const navigate = useNavigate();
 
-const navigate = useNavigate();
-const [name,setName] = useState("");
-const [email,setEmail] = useState("");
-const [password,setPassword] = useState("");
-const [role,setRole] = useState("student");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("student");
 
-const handleRegister = async (e) => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
 
-  e.preventDefault();
+    console.log("Register button clicked");
 
-  try {
+    // Basic validation
+    if (!name.trim() || !email.trim() || !password.trim()) {
+      alert("Please fill all fields");
+      return;
+    }
 
-    const res = await axios.post(
-      `${API_URL}/api/auth/register`,
-      {
-        name,
-        email,
-        password,
-        role
+    try {
+      console.log("Sending registration data:", {
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        role: role
+      });
+
+      const res = await axios.post(
+        `${API_URL}/api/auth/register`,
+        {
+          name: name.trim(),
+          email: email.trim().toLowerCase(),
+          password: password,
+          role: role
+        }
+      );
+
+      console.log("Registration response:", res.data);
+
+      if (res.data.success) {
+        alert(res.data.message || "Registration successful");
+
+        // Clear form
+        setName("");
+        setEmail("");
+        setPassword("");
+        setRole("student");
+
+        // Go to login
+        navigate("/login");
+      } else {
+        alert(res.data.message || "Registration failed");
       }
-    );
 
-    alert(res.data.message || "Registration successful");
-    navigate("/login");
-  } catch (error) {
-    console.error("Registration Error:", error);
-    const msg = error.response?.data?.message || error.message || "Registration failed";
-    alert(msg);
-  }
+    } catch (error) {
+      console.error("Registration Error:", error);
 
-};
+      if (error.response) {
+        console.log("Backend response:", error.response.data);
 
-return(
+        alert(
+          error.response.data.message ||
+          "Registration failed"
+        );
+      } else if (error.request) {
+        alert("Cannot connect to backend server");
+      } else {
+        alert("Something went wrong");
+      }
+    }
+  };
 
-<div className="auth-container">
+  return (
+    <div className="auth-container">
 
-<div className="auth-card">
+      <div className="auth-card">
 
-<h2>Create Account</h2>
-<p className="subtitle">Register to get started</p>
+        <h2>Create Account</h2>
 
-<form onSubmit={handleRegister}>
+        <p className="subtitle">
+          Register to get started
+        </p>
 
-<div className="input-group">
-<input
-type="text"
-placeholder="Full Name"
-onChange={(e)=>setName(e.target.value)}
-required
-/>
-</div>
+        <form onSubmit={handleRegister}>
 
-<div className="input-group">
-<input
-type="email"
-placeholder="Email"
-onChange={(e)=>setEmail(e.target.value)}
-required
-/>
-</div>
+          {/* Name */}
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
 
-<div className="input-group">
-<input
-type="Password"
-placeholder="Password"
-onChange={(e)=>setPassword(e.target.value)}
-required
-/>
-</div>
+          {/* Email */}
+          <div className="input-group">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-{/* Role Selection */}
+          {/* Password */}
+          <div className="input-group">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-<div className="input-group">
-<select value={role} onChange={(e)=>setRole(e.target.value)}>
+          {/* Role */}
+          <div className="input-group">
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <option value="student">
+                Student
+              </option>
 
-<option value="student">Student</option>
-<option value="teacher">Teacher</option>
+              <option value="teacher">
+                Teacher
+              </option>
+            </select>
+          </div>
 
-</select>
-</div>
+          {/* Register Button */}
+          <button
+            type="submit"
+            className="auth-btn"
+          >
+            Register
+          </button>
 
-<button className="auth-btn">Register</button>
+          {/* Login */}
+          <p className="switch-text">
+            Already have an account?
+            <Link to="/login"> Login</Link>
+          </p>
 
-<p className="switch-text">
-Already have an account?
-<Link to="/login"> Login</Link>
-</p>
+        </form>
 
-</form>
+      </div>
 
-</div>
-
-</div>
-
-)
-
+    </div>
+  );
 }
 
 export default Register;
