@@ -138,7 +138,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const authRoutes = require("./routes/authRoutes");
 
 const app = express();
-process.env.MONGO_AVAILABLE = "false";
+// process.env.MONGO_AVAILABLE = "false";
 
 /* =========================
     Middleware

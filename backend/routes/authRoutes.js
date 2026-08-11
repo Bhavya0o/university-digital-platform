@@ -9,11 +9,24 @@ const JWT_SECRET = process.env.JWT_SECRET || "mysecretkey";
 
 
 // ======================================================
-// Check MongoDB connection
+// Wait for MongoDB connection (handles serverless cold starts)
 // ======================================================
 
-const isMongoReady = () => {
-  return mongoose.connection.readyState === 1;
+const ensureMongoConnected = async (timeoutMs = 8000) => {
+  if (mongoose.connection.readyState === 1) {
+    return true;
+  }
+
+  return new Promise((resolve) => {
+    const timer = setTimeout(() => {
+      resolve(false);
+    }, timeoutMs);
+
+    mongoose.connection.once("connected", () => {
+      clearTimeout(timer);
+      resolve(true);
+    });
+  });
 };
 
 
@@ -26,7 +39,6 @@ router.post("/register", async (req, res) => {
   console.log("=================================");
   console.log("📝 REGISTER REQUEST");
   console.log("Body:", req.body);
-  console.log("MongoDB ready:", isMongoReady());
   console.log("MongoDB state:", mongoose.connection.readyState);
   console.log("=================================");
 
@@ -56,10 +68,12 @@ router.post("/register", async (req, res) => {
 
 
     // -----------------------------
-    // Check MongoDB
+    // Check MongoDB (waits for cold-start connections)
     // -----------------------------
 
-    if (!isMongoReady()) {
+    const ready = await ensureMongoConnected();
+
+    if (!ready) {
 
       console.log("❌ MongoDB is NOT connected");
 
@@ -191,10 +205,12 @@ router.post("/login", async (req, res) => {
 
 
     // -----------------------------
-    // Check MongoDB
+    // Check MongoDB (waits for cold-start connections)
     // -----------------------------
 
-    if (!isMongoReady()) {
+    const ready = await ensureMongoConnected();
+
+    if (!ready) {
 
       return res.status(503).json({
         success: false,
