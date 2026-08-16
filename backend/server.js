@@ -137,6 +137,8 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const authRoutes = require("./routes/authRoutes");
 
+const contactRoutes = require("./routes/Contact");
+
 const app = express();
 // process.env.MONGO_AVAILABLE = "false";
 
@@ -158,6 +160,9 @@ connectDB();
 ========================= */
 
 app.use("/api/auth", authRoutes);
+
+app.use("/api/Contact", contactRoutes);
+
 
 /* =========================
     Gemini AI Setup
@@ -218,6 +223,16 @@ app.post("/api/chat", async (req, res) => {
 app.get("/", (req, res) => {
   res.send("🚀 Server running successfully");
 });
+
+
+
+console.log("EMAIL_USER:", process.env.EMAIL_USER);
+console.log(
+  "EMAIL_PASSWORD exists:",
+  !!process.env.EMAIL_PASSWORD
+);
+console.log("CONTACT_EMAIL:", process.env.CONTACT_EMAIL);
+
 
 /* =========================
     Export & Start Server

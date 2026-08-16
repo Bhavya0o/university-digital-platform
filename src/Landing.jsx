@@ -346,6 +346,7 @@ function Landing() {
         <div className="nav-right">
           <a href="#features" className="nav-link">Features</a>
           <a href="#how" className="nav-link">How it works</a>
+          <a href="/Contact" className="nav-link">Contact</a>
           <button className="btn-nav" onClick={() => navigate("/Login")}>Sign in</button>
         </div>
       </nav>
